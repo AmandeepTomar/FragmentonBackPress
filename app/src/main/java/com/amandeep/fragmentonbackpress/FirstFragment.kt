@@ -20,15 +20,19 @@ class FirstFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
 
+    val onBackPressedCallback= object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            Log.e("Here i am ", " Yep You are")
+        }
+    }
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        requireActivity().onBackPressedDispatcher.addCallback(this,object : OnBackPressedCallback(true){
-            override fun handleOnBackPressed() {
-                Log.e("Here i am "," Yep You are")
-            }
 
-        })
+            requireActivity().onBackPressedDispatcher.addCallback(this,onBackPressedCallback
+        )
     }
 
     override fun onCreateView(
@@ -52,5 +56,10 @@ class FirstFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+        //unregister listener here
+        onBackPressedCallback.isEnabled = false
+        onBackPressedCallback.remove()
     }
+
+
 }
