@@ -33,6 +33,26 @@ override fun onDestroyView() {
 }
 ```
 
+I am facing issues , when i tried to implement the same in my ongoing project and its not received call in ```handleOnBackPressed()``` or ```OnBackPressedCallback()``` is not called so i have gone through project code and struture after checking codes, foung that ```onBackPressed()``` in Activity must not be do some stuff related to fragment.
+
+- As i have written some code in my Activit's ```onBackPressed()``` posted below. 
+- ``` 
+        @Override
+    public void onBackPressed() {
+        Log.e("Here We are","in BlinkIDScanBaseActivity");
+        Intent intent = new Intent();
+        setResult(RESULT_CANCELED, intent);
+        finish();
+    }
+    ```
+- just commented the code and all works fine , Its my observation , will read about it and post here.    
+
+- Same happen another Activity. 
+
+- Finally fixed my proble after removing the code from Activity's ```onBackPressed()``` 
+    
+    
+
 References 
 
 - https://betterprogramming.pub/a-new-way-to-handle-back-press-in-fragments-8a67cdcda75e
